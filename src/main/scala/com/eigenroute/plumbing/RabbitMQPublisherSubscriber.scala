@@ -11,7 +11,7 @@ import play.api.libs.json._
 
 import scala.concurrent.Future
 
-trait RabbitMQPublisherSubscriber[T <: MessageBrokerMessage] extends PublisherSubscriber {
+trait RabbitMQPublisherSubscriber extends PublisherSubscriber {
 
   val actorSystem: ActorSystem
   val lifecycle: ApplicationLifecycle
