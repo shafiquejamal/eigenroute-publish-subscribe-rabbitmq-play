@@ -4,9 +4,16 @@ version := "0.0.1"
 organization := "com.eigenroute"
 
 scalaVersion := "2.11.7"
+val opRabbitVersion = "1.6.0"
 
 // Change this to another test framework if you prefer
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.4" % "test"
+libraryDependencies ++= Seq(
+  "com.spingo" %% "op-rabbit-core"        % opRabbitVersion,
+  "com.spingo" %% "op-rabbit-play-json"   % opRabbitVersion,
+  "com.spingo" %% "op-rabbit-akka-stream" % opRabbitVersion,
+  "com.typesafe.play" %% "play" % "2.5.10",
+  "org.scalatest" %% "scalatest" % "2.2.4" % "test"
+)
 
 publishMavenStyle := true
 val resolver = Resolver.ssh("Eigenroute maven repo", "mavenrepo.eigenroute.com", 7835, "/home/mavenrepo/repo") withPermissions "0644"
