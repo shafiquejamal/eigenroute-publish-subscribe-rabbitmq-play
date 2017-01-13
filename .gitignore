@@ -1,0 +1,15 @@
+/logs/
+/project/*-shim.sbt
+/project/project/
+/project/target/
+/target/
+
+logs
+target
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/RUNNING_PID
+
