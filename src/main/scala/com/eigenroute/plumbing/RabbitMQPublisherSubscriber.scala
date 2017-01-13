@@ -18,7 +18,7 @@ trait RabbitMQPublisherSubscriber[T <: MessageBrokerMessage] extends PublisherSu
   val exchange: String
   val queueName: String
   val routingActor: ActorRef
-  val convert: (String) => Option[BrokerMessageType]
+  val convert: (String) => Option[MessageBrokerMessageType]
 
   val rabbitControl = actorSystem.actorOf(Props[RabbitControl])
 

@@ -4,11 +4,11 @@ import play.api.libs.json.JsValue
 
 trait MessageBrokerMessage {
 
-  def messageType: BrokerMessageType
+  def messageType: MessageBrokerMessageType
 
 }
 
-trait BrokerMessageType {
+trait MessageBrokerMessageType {
 
   def toMessageBrokerMessage(msg: JsValue): Option[MessageBrokerMessage]
 
