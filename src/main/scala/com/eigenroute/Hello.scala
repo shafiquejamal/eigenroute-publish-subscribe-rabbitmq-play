@@ -1,4 +1,4 @@
-package com.example
+package com.eigenroute
 
 object Hello {
   def main(args: Array[String]): Unit = {

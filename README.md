@@ -50,4 +50,4 @@ object RoutingActor {
 
 ```
 
-Don't forget to bind the injected dependency in Module.scala.
+Don't forget to bind the injected dependency in Module.scala, and to bind routing keys to the message broker queue.
