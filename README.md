@@ -1,7 +1,5 @@
 # Eigenroute Publish Subscribe
 
-This project borrows heavily (almost entirely) from [JWT Scala](https://github.com/pauldijou/jwt-scala). 
-
 ## Installation
 
 ### SBT
