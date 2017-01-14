@@ -16,7 +16,6 @@ trait RabbitMQPublisherSubscriber extends PublisherSubscriber {
   val actorSystem: ActorSystem
   val lifecycle: ApplicationLifecycle
   val exchange: String
-  val queueName: String
   val routingActor: ActorRef
   val convert: (String) => Option[MessageBrokerMessageType]
 
@@ -27,6 +26,7 @@ trait RabbitMQPublisherSubscriber extends PublisherSubscriber {
   }
 
   val conf = ConfigFactory.load()
+  val queueName: String = conf.getString("eigenroute-publish-subscribe.queueName")
 
   val factory = new ConnectionFactory()
   factory.setHost(conf.getString("op-rabbit.connection.host"))
