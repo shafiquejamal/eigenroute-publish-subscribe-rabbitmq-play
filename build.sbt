@@ -6,6 +6,10 @@ organization := "com.eigenroute"
 scalaVersion := "2.11.7"
 val opRabbitVersion = "1.6.0"
 
+resolvers ++= Seq(
+  "SpinGo OSS" at "http://spingo-oss.s3.amazonaws.com/repositories/releases"
+)
+
 // Change this to another test framework if you prefer
 libraryDependencies ++= Seq(
   "com.spingo" %% "op-rabbit-core"        % opRabbitVersion,
