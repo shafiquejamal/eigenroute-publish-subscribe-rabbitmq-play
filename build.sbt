@@ -1,13 +1,13 @@
 name := """eigenroute-publish-subscribe"""
 
-version := "0.0.3"
+version := "0.0.4"
 organization := "com.eigenroute"
 
 scalaVersion := "2.11.7"
 val opRabbitVersion = "1.6.0"
 
 resolvers ++= Seq(
- // "Eigenroute maven repo" at "http://mavenrepo.eigenroute.com/",
+  "Eigenroute maven repo" at "http://mavenrepo.eigenroute.com/",
   "SpinGo OSS" at "http://spingo-oss.s3.amazonaws.com/repositories/releases"
 )
 
