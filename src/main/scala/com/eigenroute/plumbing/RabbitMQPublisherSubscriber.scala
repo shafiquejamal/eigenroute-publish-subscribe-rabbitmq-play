@@ -7,12 +7,14 @@ import com.spingo.op_rabbit.PlayJsonSupport._
 import com.spingo.op_rabbit.{Message, RabbitControl}
 import com.thenewmotion.akka.rabbitmq._
 import com.typesafe.config.ConfigFactory
+import com.typesafe.scalalogging._
 import play.api.inject.ApplicationLifecycle
 import play.api.libs.json._
 
 import scala.concurrent.Future
+import scala.util.Try
 
-trait RabbitMQPublisherSubscriber extends PublisherSubscriber {
+trait RabbitMQPublisherSubscriber extends PublisherSubscriber with LazyLogging {
 
   val conf = ConfigFactory.load()
 
@@ -50,9 +52,16 @@ trait RabbitMQPublisherSubscriber extends PublisherSubscriber {
     val incomingMessageHandler = actorSystem.actorOf(props.withRouter(SmallestMailboxPool(nrOfInstances = nrOfInstances)))
     val consumer = new DefaultConsumer(channel) {
       override def handleDelivery(consumerTag: String, envelope: Envelope, properties: BasicProperties, body: Array[Byte]) {
-        val incomingMessageJson = Json.parse(new String(body))
-        val maybeMessage = convert(envelope.getRoutingKey).flatMap(_.toMessageBrokerMessage(incomingMessageJson))
-        maybeMessage.foreach { message => incomingMessageHandler ! message }
+        val toParse = new String(body)
+        val maybeIncomingMessageJson = Try(Json.parse(toParse)).toOption
+        maybeIncomingMessageJson.fold { logger.error(s"Could not parse incoming message: $toParse") } { incomingMessageJson =>
+          val maybeMessage = convert(envelope.getRoutingKey).flatMap(_.toMessageBrokerMessage(incomingMessageJson))
+          maybeMessage.foreach { message =>
+            logger.debug(s"Sending message: $message")
+            incomingMessageHandler ! message
+          }
+        }
+
       }
     }
     channel.basicConsume(queue, true, consumer)
