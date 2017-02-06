@@ -55,13 +55,14 @@ trait RabbitMQPublisherSubscriber extends PublisherSubscriber with LazyLogging {
         val toParse = new String(body)
         val maybeIncomingMessageJson = Try(Json.parse(toParse)).toOption
         maybeIncomingMessageJson.fold { logger.error(s"Could not parse incoming message: $toParse") } { incomingMessageJson =>
+          logger.info(s"Converting incoming message: $incomingMessageJson")
+          logger.info(s"Routing key: ${envelope.getRoutingKey}")
           val maybeMessage = convert(envelope.getRoutingKey).flatMap(_.toMessageBrokerMessage(incomingMessageJson))
           maybeMessage.foreach { message =>
             logger.debug(s"Sending message: $message")
             incomingMessageHandler ! message
           }
         }
-
       }
     }
     channel.basicConsume(queue, true, consumer)
