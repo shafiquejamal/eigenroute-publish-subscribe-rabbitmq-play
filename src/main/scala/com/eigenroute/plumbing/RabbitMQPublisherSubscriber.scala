@@ -22,7 +22,7 @@ trait RabbitMQPublisherSubscriber extends PublisherSubscriber with LazyLogging {
   val lifecycle: ApplicationLifecycle
   val exchange: String =  conf.getString("eigenroute-publish-subscribe.exchange")
   def props: Props
-  val nrOfInstances = 10000
+  val nrOfInstances = 2
   val convert: (String) => Option[MessageBrokerMessageType]
 
   val rabbitControl = actorSystem.actorOf(Props[RabbitControl])

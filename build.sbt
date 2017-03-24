@@ -1,6 +1,6 @@
 name := """eigenroute-publish-subscribe-rabbitmq-play"""
 
-version := "0.0.7"
+version := "0.0.8"
 organization := "com.eigenroute"
 
 scalaVersion := "2.11.7"
