@@ -1,13 +1,13 @@
 name := """eigenroute-publish-subscribe-rabbitmq-play"""
 
-version := "0.0.9"
+version := "0.0.10"
 organization := "com.eigenroute"
 
 scalaVersion := "2.11.7"
 val opRabbitVersion = "1.6.0"
 
 resolvers ++= Seq(
-  "Eigenroute maven repo" at "http://mavenrepo.eigenroute.com/"
+  // "Eigenroute maven repo" at "http://mavenrepo.eigenroute.com/"
 )
 
 // Change this to another test framework if you prefer
@@ -19,7 +19,7 @@ libraryDependencies ++= Seq(
   "com.spingo" %% "op-rabbit-core"        % opRabbitVersion,
   "com.spingo" %% "op-rabbit-play-json"   % opRabbitVersion,
   "com.spingo" %% "op-rabbit-akka-stream" % opRabbitVersion,
-  "com.typesafe.play" %% "play" % "2.5.10",
+  "com.typesafe.play" %% "play" % "2.5.+",
   "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 )
 
